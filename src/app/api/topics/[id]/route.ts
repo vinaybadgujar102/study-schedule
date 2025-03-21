@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
 // Update a topic (including revising it)
 export async function PUT(
-  req: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  context: { params: { id: string } }
 ) {
   const session = await getServerSession(authOptions);
 
@@ -17,7 +17,7 @@ export async function PUT(
     );
   }
 
-  const { id } = params;
+  const { id } = context.params;
 
   if (!id) {
     return NextResponse.json(
@@ -37,13 +37,14 @@ export async function PUT(
     }
 
     // Type assertion for session.user.id
+    // @ts-expect-error - Property 'id' might not exist on type User
     const userId = session.user.id as string | undefined;
 
     if (userId !== existingTopic.userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    const { nextReview, interval, rating } = await req.json();
+    const { nextReview, interval, rating } = await request.json();
 
     // Update the topic
     const updatedTopic = await prisma.topic.update({
@@ -53,7 +54,10 @@ export async function PUT(
         interval: interval !== undefined ? interval : undefined,
         history: rating
           ? [
-              ...((existingTopic.history as any) || []),
+              ...((existingTopic.history as {
+                date: string;
+                rating: number;
+              }[]) || []),
               { date: new Date().toISOString(), rating },
             ]
           : undefined,
@@ -72,8 +76,8 @@ export async function PUT(
 
 // Delete a topic
 export async function DELETE(
-  _req: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  context: { params: { id: string } }
 ) {
   const session = await getServerSession(authOptions);
 
@@ -84,7 +88,7 @@ export async function DELETE(
     );
   }
 
-  const { id } = params;
+  const { id } = context.params;
 
   if (!id) {
     return NextResponse.json(
@@ -104,6 +108,7 @@ export async function DELETE(
     }
 
     // Type assertion for session.user.id
+    // @ts-expect-error - Property 'id' might not exist on type User
     const userId = session.user.id as string | undefined;
 
     if (userId !== existingTopic.userId) {
