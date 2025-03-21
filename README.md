@@ -1,8 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Study Schedule - Spaced Repetition Learning App
 
-## Getting Started
+A web application that helps you remember what you learn through the scientifically proven spaced repetition technique. Schedule your learning, track progress, and never forget important topics again.
 
-First, run the development server:
+## 🚀 Features
+
+- **Add Topics**: Input what you've learned and automatically schedule review sessions
+- **Smart Scheduling**: Dynamic spaced repetition algorithm adapts to your learning performance
+- **Review Calendar**: Visual calendar showing upcoming review sessions
+- **Difficulty Rating**: Mark topics as Hard/Normal/Easy to adjust future review intervals
+- **Browser Notifications**: Get reminders for daily study sessions
+- **Cross-device Sync**: Sign in with Google to access your topics anywhere
+
+## 💻 Tech Stack
+
+- **Frontend**: Next.js (App Router), TypeScript, React
+- **UI**: Tailwind CSS, ShadCN/UI
+- **State Management**: Zustand
+- **Backend**: Next.js API Routes with Server Actions
+- **Database**: PostgreSQL with Prisma ORM
+- **Authentication**: NextAuth.js with Google login
+
+## 🛠️ Getting Started
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/yourusername/study-schedule.git
+cd study-schedule
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. **Set up environment variables**
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+DATABASE_URL="your-postgresql-connection-string"
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-nextauth-secret"
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+```
+
+4. **Set up the database**
+
+```bash
+npx prisma migrate dev
+```
+
+5. **Start the development server**
 
 ```bash
 npm run dev
@@ -10,27 +65,43 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🤝 Contributing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Contributions are welcome! Here's how you can help:
 
-## Learn More
+1. **Report Bugs**
 
-To learn more about Next.js, take a look at the following resources:
+   - Open an issue with a clear and detailed description
+   - Include steps to reproduce, expected behavior, and screenshots if possible
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Suggest Features**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   - Use the issue tracker to suggest new features
+   - Describe the feature, why it would be useful, and how it should work
 
-## Deploy on Vercel
+3. **Submit Pull Requests**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   - Fork the repository
+   - Create a new branch for your feature (`git checkout -b feature/amazing-feature`)
+   - Commit your changes (`git commit -m 'Add some amazing feature'`)
+   - Push to the branch (`git push origin feature/amazing-feature`)
+   - Open a Pull Request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Code Style**
+   - Follow the existing code style and conventions
+   - Write clean, readable, and well-documented code
+   - Include tests for new features
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgements
+
+- Built with [Next.js](https://nextjs.org)
+- UI components from [shadcn/ui](https://ui.shadcn.com)
+- Date handling with [date-fns](https://date-fns.org)
